@@ -21,8 +21,10 @@ export const apiClient = async (
     }
 
     // Successful response
-    const data = await response.json();
-    console.log(data);
+    let data = null;
+    try {
+      data = await response.json();
+    } catch (error) {}
     return data;
   } catch (error: any) {
     // Network error or other exceptions
