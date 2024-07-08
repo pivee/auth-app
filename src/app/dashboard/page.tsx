@@ -1,6 +1,20 @@
-import Link from "next/link";
+"use client";
+import { useAuth } from "@/providers/AuthProvider";
+import { signOut } from "@/services/authService";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
+  const router = useRouter();
+
+  const { isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) router.push("/sign-in");
+
+  function handleSignOut() {
+    signOut();
+    router.push("/sign-in");
+  }
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content text-center">
@@ -9,8 +23,8 @@ const Dashboard = () => {
           <p className="py-6">
             You have signed in to the application successfully.
           </p>
-          <button className="btn btn-ghost">
-            <Link href="/">Sign out</Link>
+          <button className="btn btn-ghost" onClick={handleSignOut}>
+            Sign out
           </button>
         </div>
       </div>

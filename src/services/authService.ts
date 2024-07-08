@@ -17,3 +17,8 @@ export const signIn = (email: string, password: string) =>
     method: "POST",
     body: JSON.stringify({ username: email, password }),
   });
+
+export const signOut = () =>
+  apiClient("/auth/sign-out", {
+    method: "POST",
+  });
